@@ -10,14 +10,10 @@ OBJ_DIR		=	objs/
 
 SRC_FILE	=	main.c\
 				error.c\
-				t_form.c\
 				printf.c\
-				ft_init.c\
 				putstring.c\
 				ft_charcheck.c\
 				ft_utility.c\
-				parsingform.c\
-				parsingargument.c\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_FILE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.c=.o))

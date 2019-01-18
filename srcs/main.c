@@ -6,7 +6,7 @@
 /*   By: jegloff <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 18:23:34 by jegloff           #+#    #+#             */
-/*   Updated: 2019/01/17 19:52:41 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/01/18 16:05:46 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int 	main(int ac, char **av)
 {
 	av = 0;
 	if (ac > 1)
-		ft_printf("tab1 = %s\n tab2 = %s\n", "salut", "ca va");
+		ft_printf("tab1 = %ababababababababad %ababababababababababad");
 	return 0;
 }

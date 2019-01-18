@@ -52,19 +52,7 @@ typedef struct		s_form
 /*Prototypes*/
 
 /*printf.c*/
-int			ft_printf(char *format, ...);
-
-/*ft_init.c*/
-t_env		*ft_initenv(char *str);
-t_opt		*ft_initopt(char *str);
-t_form		*ft_initform(char *str);
-t_env   	*ft_processinit(char *str);
-
-/*t_form.c*/
-void		create_t_form(t_env *env);
-
-/*parsingform.c*/
-void		fill_t_form(t_env *env);
+int			ft_printf(char *str);
 
 /*ft_charcheck.c*/
 int     ft_typeconv(char c);
@@ -81,8 +69,5 @@ void		ft_error(char *str);
 void 		ft_putstr(char *str);
 void 		ft_putchar(char c);
 int			ft_strlen(char *str);
-
-/*conversion.c*/
-void    parsingargument(t_env *env, va_list va);
 
 #endif
