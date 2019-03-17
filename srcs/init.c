@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 19:02:43 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/15 18:51:32 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/27 17:59:00 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_env	*ft_initenv(char *str)
 	if (!(new = (t_env *)malloc(sizeof(t_env))))
 		return (NULL);
 	new->str = str;
-	new->subs = NULL;
 	new->form = NULL;
 	return (new);
 }
@@ -50,6 +49,7 @@ t_form	*ft_initform(char *str)
 	new->width = 0;
 	new->precision = 0;
 	new->content = NULL;
+	new->result = NULL;
 	new->conversion = 0;
 	new->opt = NULL;
 	new->next = NULL;

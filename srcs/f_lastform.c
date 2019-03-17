@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/03 19:17:00 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/03 19:56:10 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/26 19:51:42 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		filllast(t_form *new, char *str, int i)
 	i = 0;
 	while (str[j] != '\0')
 		tmp[i++] = str[j++];
+	tmp[i] = '\0';
 	new->type = 0;
 	new->content = tmp;
 }
@@ -42,24 +43,31 @@ static	void	createlast(t_env *env, char *str, int i)
 	filllast(new, str, i);
 }
 
-void			lastform(t_env *env)
+void			lastform(t_env *env, int i, int k, char *str)
 {
-	int		i;
-	char	*str;
-
-	str = env->str;
-	i = 0;
-	while (str[i])
-		i++;
+	i = ft_strlen(str);
 	while (str[i] != '%')
 	{
 		i--;
-		if (i == 0)
+		if (i == 0 && str[i] != '%')
+		{
+			k = 1;
 			break ;
+		}
 	}
-	while (ft_typeconv(str[i]) != 1)
-		i++;
-	if (i != 0)
-		i++;
-	createlast(env, str, i);
+	if (k == 1)
+		createlast(env, str, i);
+	else
+	{
+		if (checkpercentform(env, str, i) == 0)
+		{
+			while (ft_typeconv(str[i]) != 1)
+				i++;
+			if (i != 0)
+				i++;
+		}
+		else
+			i++;
+		createlast(env, str, i);
+	}
 }

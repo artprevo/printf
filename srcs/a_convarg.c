@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 19:34:45 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/15 16:34:34 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/28 18:47:09 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static t_conv g_ptr[] =
 {
-	{'c', &chartostr},
-	{'s', &strtostr},
+	{'c', &convargc},
+	{'s', &convargs},
 	{'p', &convargp},
-	//		{'f', &parsargf},
-	{'d', &ft_itoa},
-	{'i', &ft_itoa},
-	//		{'o', &parsargouxx},
-	//		{'u', &parsargouxx},
-	//		{'x', &parsargouxx},
-	//		{'X', &parsargouxx},
+	{'f', &convargf},
+	{'d', &convargd},
+	{'i', &convargd},
+	{'o', &convargo},
+	{'u', &convargu},
+	{'x', &convargx},
+	{'X', &convargxx},
 	{48, NULL}
 };
 
@@ -37,13 +37,18 @@ void	convargument(t_env *env)
 	while (form)
 	{
 		i = 0;
-		if (form->type == 1)
+		if (CONV == '%' && TYPE == 1)
 		{
-			c = form->conversion;
+			RESULT = chartostr('%');
+			form = form->next;
+		}
+		if (TYPE == 1)
+		{
+			c = CONV;
 			while (g_ptr[i].conv != 48)
 			{
 				if (c == g_ptr[i].conv)
-					form->result = g_ptr[i].ft_conv(form->arg);
+					RESULT = g_ptr[i].ft_conv(form, &form->arg);
 				i++;
 			}
 		}

@@ -6,40 +6,63 @@
 /*   By: jegloff <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 18:29:51 by jegloff           #+#    #+#             */
-/*   Updated: 2019/02/15 18:42:12 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/03/15 19:00:27 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void 		print_form(t_env *env)
+int				print_form(t_env *env)
 {
-	while (env->form)
+	t_form	*form;
+	int		i;
+
+	i = 0;
+	form = 0;
+	if (env->form)
+		form = env->form;
+	while (form)
 	{
-		if (env->form->type == 1)
+		if (TYPE == 1 && RESULT != NULL)
 		{
-			if (env->form->conversion == 'p')
-			{
-				ft_putchar('0');
-				ft_putchar('x');
-			}
-			ft_putstr(env->form->result);
+			ft_putstr(RESULT);
+			if (CONV == 's' && ft_strcmp("^@", form->arg.s) == 1)
+				i += (ft_strlen(RESULT) - 1);
+			else
+				i += ft_strlen(RESULT);
 		}
-		else if (env->form->type == 0)
-			ft_putstr(env->form->content);
-		env->form = env->form->next;
+		else if (TYPE == 0 && CONTENT != NULL)
+		{
+			ft_putstr(CONTENT);
+			i += ft_strlen(CONTENT);
+		}
+		form = form->next;
 	}
+	return (i);
 }
 
-int		ft_printf(char *format, ...)
+static void		processing(t_env *env)
+{
+	errorcheck(env);
+	lastform(env, 0, 0, env->str);
+	convargument(env);
+	option(env);
+	applyformat(env);
+}
+
+int				ft_printf(char *format, ...)
 {
 	t_env		*env;
 	va_list		va;
-	va_start	(va, format);
+	int			i;
 
-	//coder itoa base (arg lli)
-	//gerer p (ptr) et f (float)
-
+	va_start(va, format);
+	if (ft_strlen(format) == 0)
+		return (0);
+	if (initialerrorcheck(format) == 0)
+		return (0);
+	if (ft_strcmp("BARTEXIT", format) == 1)
+		return (-1);
 	env = ft_processinit(format);
 	create_t_form(env);
 	if (env->form)
@@ -47,12 +70,9 @@ int		ft_printf(char *format, ...)
 		fill_t_form(env);
 		parsingargument(env, va);
 	}
-	errorcheck(env);
-	lastform(env);
-	convargument(env);
-	option(env);
-	applyformat(env);
-	print_form(env);
-	va_end (va);
-	return (0);
+	processing(env);
+	i = print_form(env);
+	va_end(va);
+	tafreetatoucompri(env);
+	return (i);
 }

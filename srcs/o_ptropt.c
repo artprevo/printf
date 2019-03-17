@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/03 20:28:52 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/15 16:05:45 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/27 18:17:53 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,34 @@ void	oposi(t_form *form, char *str, int width)
 	while (str[j])
 		tmp[i++] = str[j++];
 	free(str);
-	form->result = tmp;
+	RESULT = tmp;
 }
 
-/* a quoi sert le # ????? */
 void	ohash(t_form *form, char *str, int width)
 {
 	int		i;
 	int		j;
 	char	*tmp;
 
-	i = 0;
+	i = 2;
 	j = 0;
-	tmp = ft_strnew(width);
-	while (i < (width - ft_strlen(str)) - 1)
+	if (width != 0)
+		tmp = ft_strnew(width);
+	else
+		tmp = ft_strnew(ft_strlen(str) + 2);
+	tmp[0] = '0';
+	tmp[1] = CONV;
+	if (CONV == 'o')
+		i--;
+	if (LZERO != 0)
 	{
-		tmp[i] = ' ';
-		i++;
+		while (i < width - ft_strlen(str))
+			tmp[i++] = '0';
 	}
-	tmp[i++] = '+';
 	while (str[j])
 		tmp[i++] = str[j++];
 	free(str);
-	form->result = tmp;
+	RESULT = tmp;
 }
 
 void	olzero(t_form *form, char *str, int width)
@@ -59,18 +64,26 @@ void	olzero(t_form *form, char *str, int width)
 	int		i;
 	int		j;
 	char	*tmp;
-	
+	int		neg;
+
 	if (width == 0)
 		width = ft_strlen(str);
 	i = 0;
 	j = 0;
+	neg = 0;
 	tmp = ft_strnew(width);
-	while (i < (width - ft_strlen(str)))
+	if (str[j] == '-')
+	{
+		tmp[i++] = '-';
+		j++;
+		neg++;
+	}
+	while (i < (width - ft_strlen(str) + neg))
 		tmp[i++] = '0';
 	while (str[j])
 		tmp[i++] = str[j++];
 	free(str);
-	form->result = tmp;
+	RESULT = tmp;
 }
 
 void	ospace(t_form *form, char *str, int width)
@@ -89,7 +102,7 @@ void	ospace(t_form *form, char *str, int width)
 	while (str[j])
 		tmp[i++] = str[j++];
 	free(str);
-	form->result = tmp;
+	RESULT = tmp;
 }
 
 void	olalign(t_form *form, char *str, int width)
@@ -98,7 +111,7 @@ void	olalign(t_form *form, char *str, int width)
 	int		j;
 	char	*tmp;
 
-	if (width == 0)
+	if (width == 0 || width < ft_strlen(str))
 		width = ft_strlen(str);
 	i = 0;
 	j = 0;
@@ -108,5 +121,5 @@ void	olalign(t_form *form, char *str, int width)
 	while (i < width)
 		tmp[i++] = ' ';
 	free(str);
-	form->result = tmp;
+	RESULT = tmp;
 }

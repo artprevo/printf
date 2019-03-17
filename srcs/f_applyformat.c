@@ -6,109 +6,103 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:55:01 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/15 18:19:35 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/28 19:29:19 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static	int	emptyopt(t_opt *opt)
+static	void	applywidth(t_form *form, int i, int j, char *str)
 {
-	if (opt->posi != 0)
-		return (0);
-	if (opt->hash != 0)
-		return (0);
-	if (opt->lzero != 0)
-		return (0);
-	if (opt->space != 0)
-		return (0);
-	if (opt->lalign != 0)
-		return (0);
-	return (1);
-}
-
-static	void	applywidth(t_form *form)
-{
-	int		i;
-	int		j;
-	char	*str;
 	char	*tmp;
 
-	i = 0;
-	j = 0;
-	str = form->result;
-	tmp = 0;
-	if (emptyopt(form->opt) == 1)
+	if (CONV == 's' && str[0] == '^' && str[1] == '@' && WIDTH != 0)
+		WIDTH = WIDTH + 1;
+	if (WIDTH > ft_strlen(str))
 	{
-		if (form->width > ft_strlen(str))
+		tmp = ft_strnew(WIDTH + 1);
+		if (form->opt && LALIGN == 1)
 		{
-			tmp = ft_strnew(form->width);
-			while (i < (form->width - ft_strlen(str)))
+			while (str[j])
+				tmp[i++] = str[j++];
+			while (i <= (WIDTH - 1))
+				tmp[i++] = ' ';
+		}
+		else
+		{
+			while (i < (WIDTH - ft_strlen(str)))
 				tmp[i++] = ' ';
 			while (str[j])
 				tmp[i++] = str[j++];
-			form->result = tmp;
 		}
+		free(str);
+		RESULT = tmp;
 	}
 }
 
-static	void	applyprecisionfors(t_form *form)
+static	void	applyprecisionfors(t_form *form, int i, int j, char *str)
 {
-	int		i;
-	int		j;
 	char	*tmp;
-	char	*str;
 
-	i = 0;
-	j = 0;
-	str = form->result;
-	tmp = ft_strnew(form->precision);
-	while (i < form->precision)
-		tmp[i++] = str[j++];
-	form->result = tmp;
+	tmp = ft_strnew(PRECI);
+	if (PRECI > ft_strlen(str))
+	{
+		while (str[j])
+			tmp[i++] = str[j++];
+	}
+	else
+	{
+		while (i < PRECI)
+			tmp[i++] = str[j++];
+	}
+	free(str);
+	RESULT = tmp;
 }
 
-static	void	applyprecision(t_form *form)
+static	void	applyprecision(t_form *form, int i, int j, char *str)
 {
-	int		i;
-	int		j;
 	int		k;
 	char	*tmp;
-	char	*str;
 
-	i = 0;
-	j = 0;
-	str = form->result;
-	k = ft_strlen(str) - form->opt->posi - form->opt->space;
-	tmp = ft_strnew(form->precision + form->opt->posi + form->opt->space);
-	if (form->opt->posi != 0)
+	k = ft_strlen(str) - POSI - SPACE;
+	if (str[0] == '-')
+		PRECI = PRECI + 2;
+	tmp = ft_strnew(PRECI + POSI + SPACE);
+	if (POSI != 0)
 		tmp[i++] = '+';
-	if (form->opt->space != 0)
+	if (SPACE != 0)
 		tmp[i++] = ' ';
-	while (i < (form->precision - k))
+	if (str[0] == '-')
+	{
+		tmp[i++] = '-';
+		j++;
+	}
+	while (i < (PRECI - k))
 		tmp[i++] = '0';
 	while (str[j])
 		tmp[i++] = str[j++];
 	free(str);
-	form->result = tmp;
+	RESULT = tmp;
 }
 
-void	applyformat(t_env *env)
+void			applyformat(t_env *env)
 {
 	t_form	*form;
 
 	form = env->form;
 	while (form)
 	{
-		if (form->precision != 0 && form->conversion != 'c')
+		if (PRECI > 0 && CONV != 'c' && CONV != 'f')
 		{
-			if (form->conversion == 's')
-				applyprecisionfors(form);
-			else
-				applyprecision(form);
+			if (CONV == 's')
+				applyprecisionfors(form, 0, 0, RESULT);
+			else if (PRECI > ft_strlen(RESULT))
+				applyprecision(form, 0, 0, RESULT);
 		}
-		if (form->width != 0 && form->precision == 0)
-			applywidth(form);
+		if (WIDTH != 0 && WIDTH > PRECI)
+			applywidth(form, 0, 0, RESULT);
+		if (WIDTH != 0 && CONV == 's' && WIDTH < PRECI)
+			applywidth(form, 0, 0, RESULT);
 		form = form->next;
 	}
 }

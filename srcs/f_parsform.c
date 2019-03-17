@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 16:41:10 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/06 13:06:15 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:28:33 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,31 @@ static	void	parseopt(t_form *new, char *str)
 	}
 }
 
+static	void	parseform2(t_form *new, char *str, int i)
+{
+	if (str[i] == '.')
+	{
+		i++;
+		while (str[i] >= '0' && str[i] <= '9')
+		{
+			new->precision = new->precision * 10 + (str[i] - 48);
+			i++;
+		}
+		new->precision = (new->precision == 0) ? -1 : new->precision;
+	}
+	if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L')
+	{
+		new->size = str[i++];
+		if (str[i] == str[i - 1] && str[i] == 'h')
+			new->size = 'H';
+		else if (str[i] == str[i - 1] && str[i] == 'l')
+			new->size = 'M';
+	}
+	while (str[i])
+		i++;
+	new->conversion = str[i - 1];
+}
+
 static	void	parseform(t_form *new, char *str)
 {
 	int		i;
@@ -51,16 +76,7 @@ static	void	parseform(t_form *new, char *str)
 			j = j * 10 + str[i++] - '0';
 		new->width = j;
 	}
-	if (str[i] == '.')
-	{
-		i++;
-		new->precision = str[i++] - '0';
-	}
-	if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L')
-		new->size = str[i++];
-	while (str[i])
-		i++;
-	new->conversion = str[i - 1];
+	parseform2(new, str, i);
 }
 
 static	void	parse_form_content(t_form *new)

@@ -6,64 +6,81 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 18:26:07 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/15 19:05:59 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/28 19:29:46 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	errorc(t_form *form)
+void	errorc(t_env *env, t_form *form)
 {
-	if (form->opt->posi != 0)
-		ft_error("flag '+' results in undefined behavior \
-with 'c' conversion specifier");
-	if (form->opt->hash != 0)
-		ft_error("flag '#' results in undefined behavior \
-with 'c' conversion specifier");
-	if (form->opt->lzero != 0)
-		ft_error("flag '0' results in undefined behavior \
-with 'c' conversion specifier");
-	if (form->opt->space != 0)
-		ft_error("flag ' ' results in undefined behavior \
-with 'c' conversion specifier");
-	if (form->precision != 0)
-		ft_error("precision used with 'c' conversion specifier, \
-resulting in undefined behavior");
-	if (form->size != 48 && form->size != 'l')
-		ft_error("length modifier 'h' results in undefined behavior \
-or no effect with 'c' conversion");
+	if (POSI != 0)
+		POSI = 0;
+	if (HASH != 0)
+		HASH = 0;
+	if (LZERO != 0)
+		LZERO = 0;
+	if (SPACE != 0)
+		SPACE = 0;
+	if (PRECI != 0)
+		PRECI = 0;
+	if (SIZE != 48 && SIZE != 'l')
+		SIZE = 0;
+	env = 0;
 }
 
-void	errors(t_form *form)
+void	errors(t_env *env, t_form *form)
 {
-	if (form->opt->posi != 0)
-		ft_error("flag '+' results in undefined behavior \
-with 's' conversion specifier");
-	if (form->opt->hash != 0)
-		ft_error("flag '#' results in undefined behavior \
-with 's' conversion specifier");
-	if (form->opt->lzero != 0)
-		ft_error("flag '0' results in undefined behavior \
-with 's' conversion specifier");
-	if (form->opt->space != 0)
-		ft_error("flag ' ' results in undefined behavior \
-with 's' conversion specifier");
-	if (form->size != 48)
-		ft_error("length modifier results in undefined behavior \
-or no effect with 's' conversion");
+	if (POSI != 0)
+		POSI = 0;
+	if (HASH != 0)
+		HASH = 0;
+	if (LZERO != 0)
+		LZERO = 0;
+	if (SPACE != 0)
+		SPACE = 0;
+	if (SIZE != 48)
+		SIZE = 0;
+	if (PRECI < 0)
+		form->arg.s = "";
+	env = 0;
 }
 
-void	errorp(t_form *form)
+void	errorp(t_env *env, t_form *form)
 {
-	form = 0;
+	if (POSI != 0)
+		POSI = 0;
+	if (LZERO != 0)
+		LZERO = 0;
+	if (HASH != 0)
+		HASH = 0;
+	if (SPACE != 0)
+		SPACE = 0;
+	if (SIZE != 48)
+		SIZE = 0;
+	env = 0;
 }
 
-void	errorf(t_form *form)
+void	errorf(t_env *env, t_form *form)
 {
-	form = 0;
+	if (form)
+	{
+	}
+	if (env)
+	{
+	}
 }
 
-void	errord(t_form *form)
+void	errord(t_env *env, t_form *form)
 {
-	form = 0;
+	if (HASH != 0)
+		HASH = 0;
+	if (LZERO != 0 && LALIGN != 0)
+		LZERO = 0;
+	if (PRECI == -1 && form->arg.i == 0)
+	{
+		CONV = 's';
+		form->arg.s = "";
+	}
+	env = 0;
 }

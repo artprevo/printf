@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 15:05:39 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/06 12:16:12 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:22:41 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ static int	strform(t_form *new, char *str, int i)
 	char	*tmp;
 
 	j = i;
-	while (ft_typeconv(str[i]) == 0)
+	while (ft_typeconv(str[i]) == 0 && i < ft_strlen(str))
 	{
 		if (i != j && str[i] == '%')
-			ft_error("bad type conversion.");
+			return (initpercentform(new, str, i, j));
 		i++;
 	}
 	tmp = ft_strnew(i - j + 1);
 	i = 0;
-	while (ft_typeconv(str[j]) == 0)
+	while (ft_typeconv(str[j]) == 0 && str[j])
 	{
 		tmp[i] = str[j];
 		i++;
@@ -101,7 +101,9 @@ void		create_t_form(t_env *env)
 	str = env->str;
 	i = 0;
 	j = 0;
-	while (str[i])
+	if (ft_strlen(str) == 1 && str[0] == '%')
+		ft_error(env);
+	while (i <= ft_strlen(str))
 	{
 		if (str[i] == '%')
 		{

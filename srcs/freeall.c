@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a_ptrparsarg2.c                                    :+:      :+:    :+:   */
+/*   freeall.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/23 18:01:58 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/25 19:08:24 by artprevo         ###   ########.fr       */
+/*   Created: 2019/02/27 17:52:49 by artprevo          #+#    #+#             */
+/*   Updated: 2019/02/27 20:24:57 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		parsargouxx(t_form *form, va_list va)
+void	tafreetatoucompri(t_env *env)
 {
-	if (SIZE == 'l')
-		form->arg.li = (unsigned long long)va_arg(va, unsigned long);
-	else if (SIZE == 'M')
-		form->arg.li = (unsigned long long)va_arg(va, unsigned long long);
-	else
-		form->arg.li = (unsigned long long)va_arg(va, unsigned int);
+	t_form	*form;
+	t_form	*tmp;
+
+	if (env->form)
+	{
+		form = env->form;
+		while (form)
+		{
+			free(CONTENT);
+			free(RESULT);
+			free(form->opt);
+			tmp = form->next;
+			free(form);
+			form = tmp;
+		}
+		free(env);
+	}
 }

@@ -1,7 +1,7 @@
 NAME		=	ft_printf
 
 CC			=	gcc
-FLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address -pedantic
+FLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 
 SRC_DIR		=	srcs/
 INC_DIR		=	includes/
@@ -19,18 +19,25 @@ SRC_FILE	=	main.c\
 				u_putstring.c\
 				u_charcheck.c\
 				u_utility.c\
-				u_utility2.c\
 				u_itoa.c\
+				u_itoabase.c\
 				f_lastform.c\
 				f_parsform.c\
 				f_applyformat.c\
+				percentform.c\
 				a_parsarg.c\
 				a_convarg.c\
+				a_ptrconvarg1.c\
+				a_ptrconvarg2.c\
 				a_ptrparsarg1.c\
 				a_ptrparsarg2.c\
 				e_errorcheck.c\
 				e_ptrerror1.c\
 				e_ptrerror2.c\
+				e_initialerrorcheck.c\
+				conversion_float.c\
+				u_utility_double.c\
+				freeall.c\
 
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC_FILE))
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRC_FILE:.c=.o))

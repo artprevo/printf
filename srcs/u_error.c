@@ -6,15 +6,15 @@
 /*   By: jegloff <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 18:03:44 by jegloff           #+#    #+#             */
-/*   Updated: 2019/02/15 18:53:48 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/27 20:13:42 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		ft_error(char *str)
+void		ft_error(t_env *env)
 {
-	ft_putstr("error: ");
-	ft_putstr(str);
-	exit(0);
+	if (env)
+		tafreetatoucompri(env);
+	ft_printf("BARTEXIT");
 }

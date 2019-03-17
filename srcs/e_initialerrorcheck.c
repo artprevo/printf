@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a_ptrparsarg2.c                                    :+:      :+:    :+:   */
+/*   e_initialerrorcheck.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/23 18:01:58 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/25 19:08:24 by artprevo         ###   ########.fr       */
+/*   Created: 2019/02/22 20:36:15 by artprevo          #+#    #+#             */
+/*   Updated: 2019/02/26 19:45:14 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		parsargouxx(t_form *form, va_list va)
+int	initialerrorcheck(char *str)
 {
-	if (SIZE == 'l')
-		form->arg.li = (unsigned long long)va_arg(va, unsigned long);
-	else if (SIZE == 'M')
-		form->arg.li = (unsigned long long)va_arg(va, unsigned long long);
-	else
-		form->arg.li = (unsigned long long)va_arg(va, unsigned int);
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			while (str[i++])
+			{
+				if (ft_typeconv(str[i]) == 1 || str[i] == '%')
+					break ;
+				if (i >= (ft_strlen(str) - 1))
+					return (0);
+			}
+		}
+		i++;
+	}
+	return (1);
 }

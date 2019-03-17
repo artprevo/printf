@@ -6,7 +6,7 @@
 /*   By: jegloff <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 18:06:47 by jegloff           #+#    #+#             */
-/*   Updated: 2019/02/03 20:17:42 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/26 18:57:35 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ void		ft_putnbr(int n)
 	if (n > 9)
 		ft_putnbr(n / 10);
 	ft_putchar(n % 10 + 48);
+}
+
+int			ft_strcmp(char *str, char *tmp)
+{
+	while (*str)
+	{
+		if (*str++ != *tmp++)
+			return (0);
+	}
+	return (1);
 }

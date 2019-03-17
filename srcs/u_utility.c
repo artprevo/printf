@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 15:42:00 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/15 16:49:27 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/26 18:54:17 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,13 @@ char	*ft_strnew(int size)
 	return (str);
 }
 
-char	*chartostr(int d)
+char	*chartostr(char c)
 {
-	char	*str;
-	char	c;
+	char	*res;
 
-	c = d;
-	str = ft_strnew(1);
-	str[0] = c;
-	return (str);
+	res = ft_strnew(1);
+	res[0] = c;
+	return (res);
 }
 
 char	*ft_strcpy(char *dst, char *src)
