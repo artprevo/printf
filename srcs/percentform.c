@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:18:23 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/27 19:04:24 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/09/12 17:47:43 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ int		initpercentform(t_form *new, char *str, int i, int j)
 	}
 	new->type = 1;
 	new->content = tmp;
-	return (j);
+	return (j + 1);
 }

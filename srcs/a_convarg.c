@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 19:34:45 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/28 18:47:09 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/09/12 14:59:15 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ static t_conv g_ptr[] =
 	{48, NULL}
 };
 
+static	char	*convargpercent(char *str)
+{
+	char	*tmp;
+
+	str = 0;
+	tmp = ft_strnew(1);
+	tmp[0] = '%';
+	return (tmp);
+}
 void	convargument(t_env *env)
 {
 	t_form	*form;
@@ -39,7 +48,7 @@ void	convargument(t_env *env)
 		i = 0;
 		if (CONV == '%' && TYPE == 1)
 		{
-			RESULT = chartostr('%');
+			RESULT = convargpercent(CONTENT);
 			form = form->next;
 		}
 		if (TYPE == 1)

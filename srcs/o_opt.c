@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/03 20:19:46 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/28 19:17:08 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/09/12 19:40:45 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void			option(t_env *env)
 	form = env->form;
 	while (form)
 	{
-		if (CONV == 'c' || CONV == 's' || CONV == '%' || CONV == 'p')
+		if (CONV == '%')
 			break ;
 		if (checkoptionerror(env, form) == 1 && PRECI <= ft_strlen(RESULT))
 		{

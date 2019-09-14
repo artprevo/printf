@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: jegloff <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 18:23:34 by jegloff           #+#    #+#             */
-/*   Updated: 2019/02/28 17:13:48 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/09/14 16:26:12 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int 	main(int ac, char **av)
 		ft_printf("%-50.3d is a string\n", 42);
 		
 	}
+	if (ac == 2)
+	{
 	unsigned long long int	i = -922337203685;
 	unsigned long		j = -42;
 	unsigned int		h = -2500;
@@ -86,5 +88,8 @@ int 	main(int ac, char **av)
 		ft_printf("ft_printf = %llX\n", i);
 		printf("le printf = %llu\n", i);
 		ft_printf("ft_printf = %llu\n", i);
-		return (0);
+	}
+	printf("%lld", -9223372036854775808);
+	ft_printf("%lld", -9223372036854775808);
+	return (0);
 }

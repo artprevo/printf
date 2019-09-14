@@ -6,7 +6,7 @@
 /*   By: jegloff <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 18:29:51 by jegloff           #+#    #+#             */
-/*   Updated: 2019/03/15 19:00:27 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/09/12 19:42:11 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int				print_form(t_env *env)
 	{
 		if (TYPE == 1 && RESULT != NULL)
 		{
-			ft_putstr(RESULT);
-			if (CONV == 's' && ft_strcmp("^@", form->arg.s) == 1)
-				i += (ft_strlen(RESULT) - 1);
+			if (CONV == 'c' && form->arg.c == '\0')
+				i += (ft_strlen(RESULT) + 1);
 			else
 				i += ft_strlen(RESULT);
+			ft_putstr(RESULT);
 		}
 		else if (TYPE == 0 && CONTENT != NULL)
 		{

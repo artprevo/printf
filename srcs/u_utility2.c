@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 13:43:25 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/15 16:49:29 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/09/12 19:34:09 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 		*ptr1++ = *ptr2++;
 	return (dst);
 }
-
+/*
 char	*convargp(intptr_t *ptr)
 {
 	unsigned long	adr;
@@ -51,3 +51,4 @@ char	*convargp(intptr_t *ptr)
 	res[i] = base[(adr % 16)];
 	return (res);
 }
+*/

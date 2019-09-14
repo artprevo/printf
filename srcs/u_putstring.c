@@ -6,7 +6,7 @@
 /*   By: jegloff <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 18:06:47 by jegloff           #+#    #+#             */
-/*   Updated: 2019/02/26 18:57:35 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/09/12 19:42:55 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void		ft_putstr(char *str)
 	i = 0;
 	while (str[i])
 	{
-		ft_putchar(str[i]);
+		if (str[i] == 1)
+			ft_putchar('\0');
+		else
+			ft_putchar(str[i]);
 		i++;
 	}
 }

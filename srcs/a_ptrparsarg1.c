@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 17:45:33 by artprevo          #+#    #+#             */
-/*   Updated: 2019/02/28 17:28:54 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/09/12 19:44:09 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ void		parsargd(t_form *form, va_list va)
 
 void		parsargc(t_form *form, va_list va)
 {
-	form->arg.c = va_arg(va, int);
+		form->arg.c = va_arg(va, int);
 	if (form->arg.c == 0)
-	{
-		CONV = 's';
-		form->arg.s = "^@";
-	}
+		form->arg.c = 1;
 }
 
 void		parsargs(t_form *form, va_list va)

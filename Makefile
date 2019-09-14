@@ -8,7 +8,7 @@ INC_DIR		=	includes/
 INC_LIB		=	libft/include/
 OBJ_DIR		=	objs/
 
-SRC_FILE	=	main.c\
+SRC_FILE	=	main5.c\
 				u_error.c\
 				f_t_form.c\
 				printf.c\
