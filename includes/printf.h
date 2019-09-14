@@ -6,7 +6,7 @@
 /*   By: artprevo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 19:31:20 by artprevo          #+#    #+#             */
-/*   Updated: 2019/09/14 16:28:51 by artprevo         ###   ########.fr       */
+/*   Updated: 2019/02/28 19:31:51 by artprevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ typedef struct		s_error
 /*
 ** printf.c
 */
-int					ft_printf(char *format, ...);
-// __attribute__((format(printf,1,2)));
+int					ft_printf(char *format, ...)
+ __attribute__((format(printf,1,2)));
 
 /*
 ** freall.c
