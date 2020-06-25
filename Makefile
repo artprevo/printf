@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
-FLAGS = -Wall -Wextra -Werror
+FLAGS = 
 PRINTFSRC = u_error.c\
 			f_t_form.c\
 			printf.c\
